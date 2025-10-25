@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: your-dockerhub-username/html-conversion-api:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/html-conversion-api:latest
