@@ -1,30 +1,38 @@
-name: Build and Push Docker Image
+# .github/workflows/deploy.yml
+name: CI/CD Pipeline
 
-# This action runs on every push to the 'main' branch
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  build-and-push:
-    runs-on: ubuntu-latest # Use a standard Linux runner
-
+  build-and-test:
+    runs-on: ubuntu-latest
     steps:
-      # 1. Check out the repository code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Log in to Docker Hub
+      # This login is needed to pull the base image from ghcr.io
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.LOGIN_TOKEN }}
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 3. Build the Docker image and push it to Docker Hub
+      # Build and push step
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/html-conversion-api:latest
+          # Only push the image if the event is a push to the main branch
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          tags: hemanth0411/html-conversion-api:latest
