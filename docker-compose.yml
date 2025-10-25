@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  # This is the name of our service
+  api-service:
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    # Name the image that gets built
+    image: hemanth0411/html-conversion-api
+    # Map the ports
+    ports:
+      - "8080:8080"
+    # Set environment variables if needed in the future
+    environment:
+      - NODE_ENV=production

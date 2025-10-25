@@ -1,5 +1,5 @@
 # image from Docker Hub – has Node + Chromium + Puppeteer
-FROM ghcr.io/puppeteer/puppeteer:21.3.6
+FROM ghcr.io/puppeteer/puppeteer:latest
 
 # Set the working directory in the container
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install production dependencies
-RUN npm ci --only=production
+RUN npm install --only=production
 
 # Copy the rest of the application code
 COPY . .
