@@ -110,3 +110,10 @@ The API will be available at `http://localhost:8080`.
 -   **Success Response:**
     -   **Code:** `200 OK`
     -   **Content:** The binary data of the `.docx` file.
+
+
+## License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+The project is built upon the official Puppeteer Docker image (`ghcr.io/puppeteer/puppeteer`), which is licensed under the Apache 2.0 License. The full text of this license, along with attribution, is included in the `LICENSE` file in this repository.

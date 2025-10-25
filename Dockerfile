@@ -14,6 +14,9 @@ USER pptruser
 # Copy the rest of the application code
 COPY . .
 
+# Copy the license file into the application directory
+COPY LICENSE /app/LICENSE
+
 # Expose the port the app runs on
 EXPOSE 8080
 
