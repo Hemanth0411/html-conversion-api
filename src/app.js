@@ -1,10 +1,14 @@
 const express = require('express');
+const conversionRoutes = require('./routes/conversionRoutes');
+
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.get('/', (req, res) => {
-  res.send('HTML Conversion API is running!');
-});
+// Middleware to parse JSON bodies
+app.use(express.json({ limit: '10mb' })); // Increased limit for larger HTML content
+
+// Use the conversion routes for any path starting with /api/convert
+app.use('/api/convert', conversionRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
