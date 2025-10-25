@@ -114,6 +114,6 @@ The API will be available at `http://localhost:8080`.
 
 ## License
 
-This project is open-source and available under the [MIT License](LICENSE).
+The source code for this project is licensed under the **[MIT License](LICENSE)**.
 
-The project is built upon the official Puppeteer Docker image (`ghcr.io/puppeteer/puppeteer`), which is licensed under the Apache 2.0 License. The full text of this license, along with attribution, is included in the `LICENSE` file in this repository.
+This project utilizes the official Puppeteer Docker image (`ghcr.io/puppeteer/puppeteer`) as its base. The license for the base image and the Puppeteer library is **Apache 2.0**. A full copy of the Apache 2.0 license and the required attributions are available in the **[NOTICE](NOTICE)** file.
