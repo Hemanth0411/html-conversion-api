@@ -1,5 +1,5 @@
-// src/controllers/conversionController.js
 const puppeteer = require('puppeteer');
+const htmlToDocx = require('html-to-docx');
 
 const convertToPdf = async (req, res) => {
   const { html } = req.body;
@@ -43,6 +43,26 @@ const convertToPdf = async (req, res) => {
   }
 };
 
+const convertToDocx = async (req, res) => {
+  const { html } = req.body;
+
+  if (!html) {
+    return res.status(400).json({ error: 'HTML content is required.' });
+  }
+
+  try {
+    const docxBuffer = await htmlToDocx(html);
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    res.setHeader('Content-Disposition', 'attachment; filename=converted.docx');
+    res.send(docxBuffer);
+  } catch (error) {
+    console.error('Error generating DOCX:', error);
+    res.status(500).json({ error: 'Failed to generate DOCX.' });
+  }
+};
+
 module.exports = {
   convertToPdf,
+  convertToDocx, 
 };
