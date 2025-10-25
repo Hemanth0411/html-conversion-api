@@ -8,8 +8,9 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install production dependencies
+USER root
 RUN npm install --only=production
-
+USER pptruser
 # Copy the rest of the application code
 COPY . .
 
