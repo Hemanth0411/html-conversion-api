@@ -1,5 +1,8 @@
 const puppeteer = require('puppeteer');
 const htmlToDocx = require('html-to-docx');
+const TurndownService = require('turndown');
+
+const turndownService = new TurndownService();
 
 const convertToPdf = async (req, res) => {
   const { html } = req.body;
@@ -62,7 +65,28 @@ const convertToDocx = async (req, res) => {
   }
 };
 
+const convertToMarkdown = async (req, res) => {
+  const { html } = req.body;
+
+  if (!html) {
+    return res.status(400).json({ error: 'HTML content is required.' });
+  }
+
+  try {
+    const markdown = turndownService.turndown(html);
+    
+    // Set response headers for plain text/markdown
+    res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+    res.send(markdown);
+
+  } catch (error) {
+    console.error('Error generating Markdown:', error);
+    res.status(500).json({ error: 'Failed to generate Markdown.' });
+  }
+};
+
 module.exports = {
   convertToPdf,
-  convertToDocx, 
+  convertToDocx,
+  convertToMarkdown,
 };

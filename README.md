@@ -23,7 +23,7 @@ The entire application is containerized in Docker, making it portable, scalable,
 
 -   Convert HTML to high-fidelity PDF using a real browser engine (Chromium).
 -   Convert HTML to Microsoft Word (.docx).
--   (Coming Soon) Convert HTML to Markdown.
+-   Convert HTML to Markdown.
 -   Simple, RESTful API interface.
 -   Fully containerized and ready for deployment.
 -   Automated build and publish pipeline.
@@ -56,7 +56,7 @@ graph TD
     subgraph "HTML Conversion API"
         A["POST /api/convert/pdf"]
         B["POST /api/convert/word"]
-        C["(Future) POST /api/convert/markdown"]
+        C["POST /api/convert/markdown"]
     end
 ```
 
@@ -193,7 +193,7 @@ The API will be available at `http://localhost:8080`.
     ```
 -   **Success Response:**
     -   **Code:** `200 OK`
-    -   **Content:** The binary data of the PDF file.
+    -   **Content:** The binary data of the PDF file (`Content-Type: application/pdf`).
 
 ### Convert HTML to Word
 
@@ -207,8 +207,21 @@ The API will be available at `http://localhost:8080`.
     ```
 -   **Success Response:**
     -   **Code:** `200 OK`
-    -   **Content:** The binary data of the `.docx` file.
+    -   **Content:** The binary data of the `.docx` file (`Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document`).
 
+### Convert HTML to Markdown
+
+-   **URL:** `/api/convert/markdown`
+-   **Method:** `POST`
+-   **Body (raw JSON):**
+    ```json
+    {
+      "html": "<h1>Hello Markdown</h1><p>This is your content.</p>"
+    }
+    ```
+-   **Success Response:**
+    -   **Code:** `200 OK`
+    -   **Content:** The converted Markdown as plain text (`Content-Type: text/markdown`).
 
 ## License
 
