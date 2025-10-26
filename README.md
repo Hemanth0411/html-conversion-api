@@ -38,8 +38,17 @@ The entire application is containerized in Docker, making it portable, scalable,
 *   **HTML to Word:** [html-to-docx](https://www.npmjs.com/package/html-to-docx)
 *   **Containerization:** [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)
 *   **CI/CD:** [GitHub Actions](https://github.com/features/actions)
+*   **API Documentation:** [Swagger](https://swagger.io/) / [OpenAPI](https://www.openapis.org/)
 
 ---
+
+## API Documentation
+
+This project includes interactive API documentation using Swagger UI. Once the server is running, you can access the documentation in your browser.
+
+**URL: [http://localhost:8080/api-docs](http://localhost:8080/api-docs)**
+
+The documentation provides a list of all available endpoints, their parameters, request bodies, and response types. You can also test the endpoints directly from the UI.
 
 ---
 
